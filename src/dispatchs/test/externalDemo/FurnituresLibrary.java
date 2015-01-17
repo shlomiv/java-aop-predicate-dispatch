@@ -4,7 +4,7 @@ import dispatchs.inspect.DefMethod;
 import dispatchs.inspect.DefMulti;
 import dispatchs.inspect.Helper.Dispatcher;
 
-public class FurnituresLibrary {
+final public class FurnituresLibrary {
 	public static class Furniture{
 		public String name() {return "None";}
 	};

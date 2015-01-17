@@ -1,3 +1,12 @@
+// Furniture Demo
+// 	
+// This demo shows how we can implement handlers for multimethods outside the original scope.
+// This allows us to decouple implementation from definition, and gives another convenient way for
+// extending functionality other than inheritance.
+//
+// Assume here that we have no access to FurnitureLibrary source, which is also declared final, 
+// and want to add functionality that inheritance would be impossible (in this case) or cumbersome (in most cases).
+
 package dispatchs.test;
 
 import dispatchs.inspect.DefMethod;

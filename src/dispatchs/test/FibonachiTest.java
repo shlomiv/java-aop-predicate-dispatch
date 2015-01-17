@@ -1,3 +1,9 @@
+// Fibonachi Demo	
+// 
+// an example demonstrating selecting an implementation based on type and _value_ of all arguments.
+// by using the resolveList function, we simplify the definition of our "switch cases" for the execution, 
+// each line is evaluated in the order given. 
+
 package dispatchs.test;
 
 import static dispatchs.inspect.Helper.resolveList;
@@ -11,14 +17,13 @@ import fj.P2;
 import fj.data.List;
 
 public class FibonachiTest {
-	
 	// Set up method selector
 	@SuppressWarnings("unchecked")
 	static List<P2<List<Pred>, String>> b = new Builder()
-								.objVal(List.list(Integer.class), List.list(1), "First")
-								.objVal(List.list(Integer.class), List.list(2), "First")
-								.obj   (List.list(Integer.class), "Rest")
-								.build();
+			.objVal(List.list(Integer.class), List.list(1), "First")
+			.objVal(List.list(Integer.class), List.list(2), "First")
+			.obj   (List.list(Integer.class), "Rest")
+			.build();
 	
 	static public class FibResolver implements Dispatcher {
 		public String choose(Object... args) {

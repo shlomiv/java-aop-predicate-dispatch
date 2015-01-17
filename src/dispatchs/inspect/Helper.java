@@ -62,7 +62,7 @@ public class Helper {
 		}
 	}
 	
-	// this function finds the first matching method based on Pred.is method hierarchy 
+	// this function finds the first matching method based on Pred.is(..) method hierarchy 
 	static public String resolveList(List<P2<List<Pred>, String>> b, List<Object> args){
 		return b.find(x->x._1().zip(args).forall(y->y._1().is(y._2()))).map(P2.__2()).orSome("Error");
 	}

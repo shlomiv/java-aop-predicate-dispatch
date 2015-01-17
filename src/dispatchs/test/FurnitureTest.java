@@ -14,12 +14,14 @@ import dispatchs.test.externalDemo.FurnituresLibrary;
 import dispatchs.test.externalDemo.FurnituresLibrary.Furniture;
 
 public class FurnitureTest {
+	// Extend some data-structure we want to dispatch on
 	static public class Sofa extends Furniture{
 		@Override public String name() {
 			return "Sofa";
 		}	
 	}
 	
+	// Extend the library's multimethod to now support our own extension
 	@DefMethod(name="fornitrure-builder", selector="Sofa", external=true)
 	public static Boolean builder_chair(FurnituresLibrary t, Furniture f) {
 		System.out.println("Building the sofa!!! " + t.someState());
@@ -27,8 +29,8 @@ public class FurnitureTest {
 		return true;
 	}
 	
+	// call the original library method with our extended data-structure
 	public static void main(String[] args) {
 		new FurnituresLibrary().builder(new Sofa());
 	}
-
 }

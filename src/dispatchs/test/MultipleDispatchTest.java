@@ -14,17 +14,21 @@ package dispatchs.test;
 import dispatchs.inspect.MultipleDispatch;
 
 public class MultipleDispatchTest {
+	
+	// create some class hierarchy
 	static class A{};
 	static class C1 extends A{};
 	static class C2 extends A{};
 	static class D  extends C1{};
 
+	// define a bunch of methods based on that hierarchy
 	@MultipleDispatch
 	public int f(C1 a, C2 b) {
 		return 2;
 	}
 	
-	// Most general case, does not take over, try to move this method around
+	// this is the most general case
+	// note that it does not take over, try to move this method around
 	@MultipleDispatch
 	public int f(A a, A b) {
 		return 3;
@@ -40,7 +44,7 @@ public class MultipleDispatchTest {
 		return 4;
 	}
 
-	
+	// Show off our multiple dispatch mechanism, built entirely in terms of our generic predicate dispatch system
 	public static void main(String[] args) {
 		A[] a = new A[3];
 		a[0] = new C2();

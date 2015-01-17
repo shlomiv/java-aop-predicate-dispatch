@@ -25,7 +25,7 @@ public class Helper {
 		return resolveList(b, List.list(args));
 	}
 		
-	static public interface Dispatcher {
+	static public interface Resolver {
 		String choose(Object... args);
 	}
 	

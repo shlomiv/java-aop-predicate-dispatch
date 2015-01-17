@@ -95,9 +95,15 @@ public aspect inspector {
 		
 		// order of methods is defined by checking if a signature is made up entirely of the superclasses of other 
 		// signatures. this is important so that most-generic implementation would not overtake everything else.
-		Ord<List<Class>> or = Ord.<List<Class>>ord(a->b->a.zip(b).forall(x->x._1().isAssignableFrom(x._2()))?Ordering.GT:Ordering.EQ);
+		Ord<List<Class>> or = Ord.<List<Class>>ord(a->b->a.zip(b).forall(x->x._2().isAssignableFrom(x._1()))?Ordering.LT:Ordering.EQ);
 		
 		List<List<Class>> l = Helper.multipleDispatch.get(name).valueE("NONE").sort(or);
+		
+//		Show<List<Class>> s1 = Show.listShow(Show.stringShow.<Class>comap(f->f.getName()));
+//		System.out.println("MD - order");
+//		for (List<Class> list : l) {
+//			System.out.println("  " + s1.showS(list));
+//		}
 		
 		List<P2<List<Pred>, String>> b = l.foldLeft(builder->option->builder.obj(option, s.showS(option.map(x->x.getName()))), new Builder()).build();
 //		System.out.println("Trying ");

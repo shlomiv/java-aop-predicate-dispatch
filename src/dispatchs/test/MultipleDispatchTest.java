@@ -1,3 +1,14 @@
+// MultipleDispatch Demo
+//
+// Using the generic ability to supply a selector function as a function of the 
+// arguments (on both types and values), I was able to derive a mechanism for implicitly
+// handling multiple dispatch. This example demonstrates calling the method f, with runtime
+// variable types, so at compile time it is unknown which implementation to pick.
+//
+// Note that the order of implementation is NOT significant, which means that an order between
+// parameter list declarations had to be defined, thus making sure that the most general case
+// does not take over some or all other cases. 
+
 package dispatchs.test;
 
 import dispatchs.inspect.MultipleDispatch;
@@ -7,26 +18,28 @@ public class MultipleDispatchTest {
 	static class C1 extends A{};
 	static class C2 extends A{};
 	static class D  extends C1{};
-		
+
 	@MultipleDispatch
 	public int f(C1 a, C2 b) {
 		return 2;
 	}
 	
-	@MultipleDispatch
-	public int f(C2 a, C1 b) {	
-		return 1;
-	}
-	
-	@MultipleDispatch
-	public int f(D a, C1 b) {	
-		return 4;
-	}
-	
+	// Most general case, does not take over, try to move this method around
 	@MultipleDispatch
 	public int f(A a, A b) {
 		return 3;
 	}
+
+	@MultipleDispatch
+	public int f(C2 a, C1 b) {	
+		return 1;
+	}
+
+	@MultipleDispatch
+	public int f(D a, C1 b) {	
+		return 4;
+	}
+
 	
 	public static void main(String[] args) {
 		A[] a = new A[3];

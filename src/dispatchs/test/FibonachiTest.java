@@ -6,30 +6,29 @@
 
 package dispatchs.test;
 
-import static dispatchs.inspect.Helper.resolveList;
 import dispatchs.inspect.DefMethod;
 import dispatchs.inspect.DefMulti;
+import dispatchs.inspect.inspector;
 import dispatchs.inspect.Helper.Builder;
-import dispatchs.inspect.Helper.Pred;
 import dispatchs.inspect.Helper.Resolver;
-import fj.P2;
+import fj.F;
 import fj.data.List;
 
 public class FibonachiTest {
-
+	
 	// a helper list to make writing the dispatch more declarative
 	@SuppressWarnings("unchecked")
-	static List<P2<List<Pred>, String>> b = new Builder()
-			.objVal(List.list(Integer.class), List.list(1), "First") // first argument is 1
-			.objVal(List.list(Integer.class), List.list(2), "First") // first argument is 2
-			.obj   (List.list(Integer.class), "Rest")                // first argument is any integer
+	static F<List<Object>, String>b = new Builder()
+			.val(List.list(1), "First") // first argument is 1
+			.val(List.list(2), "First") // first argument is 2
+			.<Integer>any1(List.list((Integer x)->x>2), "Rest")                // first argument is any integer
 			.build();
 	
 	// set up the specific resolver function
 	static public class FibResolver implements Resolver {
 		public String choose(Object... args) {
 			// use a helper method that uses our list selector as a declarative dispatch function
-			return resolveList(b, args); 
+			return b.f(List.list(args)); 
 		}};	
 	
 	// Define multimethod, the body of this function will only execute in case of an error in the selector

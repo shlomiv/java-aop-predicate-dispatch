@@ -11,10 +11,10 @@
 
 package dispatchs.test;
 
-import dispatchs.inspect.MultipleDispatch;
+import dispatch.extend.MultipleDispatch;
 
 public class MultipleDispatchTest {
-	
+		
 	// create some class hierarchy
 	static class A{};
 	static class C1 extends A{};
@@ -24,6 +24,8 @@ public class MultipleDispatchTest {
 	// define a bunch of methods based on that hierarchy
 	@MultipleDispatch
 	public int f(C1 a, C2 b) {
+//		if (true) throw new Error();
+		
 		return 2;
 	}
 	

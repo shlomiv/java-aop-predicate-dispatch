@@ -21,10 +21,12 @@ public class FurnitureTest {
 		}	
 	}
 	
-	// Extend the library's multimethod to now support our own extension
+	// Extend the library's multimethod to now support our own extension. 
+	// Extensions method must be static, and receives the original object reference (this)
+	// as the first parameter
 	@DefMethod(name="fornitrure-builder", selector="Sofa", external=true)
-	public static Boolean builder_chair(FurnituresLibrary t, Furniture f) {
-		System.out.println("Building the sofa!!! " + t.someState());
+	public static Boolean builder_chair(FurnituresLibrary _this, Furniture f) {
+		System.out.println("Building the sofa!!! " + _this.someState());
 		
 		return true;
 	}

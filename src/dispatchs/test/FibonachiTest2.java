@@ -16,13 +16,11 @@ import fj.data.Enumerator;
 import fj.data.List;
 import fj.data.Stream;
 
-public class FibonachiTest {
+public class FibonachiTest2 {
 	
 	// a helper list to make writing the dispatch more declarative
 	@SuppressWarnings("unchecked")
 	static F<List<Object>, String>b = new Builder()
-			.val(List.list(1), "First") // first argument is 1
-			.val(List.list(2), "First") // first argument is 2
 			.<Integer>pred(List.list((Integer x)->x>2), "Rest")                // first argument is any integer
 			.build();
 	
@@ -33,15 +31,9 @@ public class FibonachiTest {
 			return b.f(List.list(args)); 
 		}};	
 	
-	// Define multimethod, the body of this function will only execute in case of an error in the selector
+	// In this example, we use the default case as the recursion base
 	@DefMulti(f = FibResolver.class, name = "fib")
 	public Integer fib(Integer a) {
-		return -1;
-	}
-
-	// Define base case method
-	@DefMethod(name = "fib", selector = "First")
-	public Integer fib1(Integer a) {
 		return 1;
 	}
 
@@ -53,7 +45,7 @@ public class FibonachiTest {
 		
 	// Run it 
 	public static void main(String[] args) {
-		System.out.println("Fibonacci: " + new FibonachiTest().fib(9));
+		System.out.println("Fibonacci: " + new FibonachiTest2().fib(9));
     }
 }
 

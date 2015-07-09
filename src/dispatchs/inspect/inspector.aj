@@ -30,7 +30,7 @@ public aspect inspector {
 				.map(x->P.p(x,x.getAnnotationsByType(DefMethod.class)))
 				.filter(x->x._2().length>0)
 				.map(x->P.p(x._1(), (DefMethod)x._2()[0]));		
-					
+//					System.out.println(thisJoinPoint.getSignature().getDeclaringType());
 		Helper.methodMap     = mmethods.foldLeft ((map, n)->map.set(n._2().name(), map.get(n._2().name()).orSome(TreeMap.empty(Ord.stringOrd)).set(n._2().selector(), n._1())), Helper.methodMap);
 	}
     
@@ -42,7 +42,7 @@ public aspect inspector {
 			
 			// get the required method from the registry
 			Method m = Helper.methodMap.get(l.name()).valueE("No implementations for " + l.name()).get(select).valueE("No matching implementation for " + select);
-			
+
 			// in case we are extending from an external location, add this as the first parameter
 			if (m.getAnnotationsByType(DefMethod.class)[0].external()) {
 				Object [] args = thisJoinPoint.getArgs();

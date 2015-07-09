@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME) @Target({METHOD})
 public @interface DefMethod {
-	String name();
-	String selector();
+	String name(); // tag
+	String selector(); //when
 	boolean external()     default false; 
 }
